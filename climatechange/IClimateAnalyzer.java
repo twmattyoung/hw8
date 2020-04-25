@@ -1,7 +1,6 @@
 package climatechange;
 
-import java.util.TreeSet;
-import java.util.ArrayList;
+import java.util.*;
 
 interface IClimateAnalyzer {
 	public ITemperature getLowestTempByMonth(String country, int month);

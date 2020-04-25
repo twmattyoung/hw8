@@ -1,8 +1,6 @@
 package climatechange;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 class MaxAndMin {
     public double maxTemp;
@@ -27,13 +25,27 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
     }
 
 	public ITemperature getLowestTempByMonth(String country, int month) {
-        for (ITemperature record : records) {
+		ITemperature lowest = records.get(0);
+		for (ITemperature record : records) {
+			if (record.getCountry().equals(country) && record.getMonth().equals(WeatherIO.monthTab.get(month))) {
+				if (record.getTemperature(true) <= lowest.getTemperature(true)) {
+					lowest = record;
+				}
+        	}
         }
-        return null;
+        return lowest;
     }
 
 	public ITemperature getHighestTempByMonth(String country, int month) {
-        return null;
+		ITemperature highest = records.get(0);
+		for (ITemperature record : records) {
+			if (record.getCountry().equals(country) && record.getMonth().equals(WeatherIO.monthTab.get(month))) {
+				if (record.getTemperature(true) >= highest.getTemperature(true)) {
+					highest = record;
+				}
+        	}
+        }
+        return highest;
     }
 
 	public ITemperature getLowestTempByYear(String country, int year){
@@ -88,9 +100,13 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
             ArrayList<ITemperature> A1 = new ArrayList<ITemperature>();
             System.out.print("Enter Country : ");
             String country = scanner.nextLine();
-            System.out.print("Enter Month : ");
+            System.out.print("Enter Month(1-12) : ");
             String month = scanner.nextLine();
-            A1.add(analyzer.getLowestTempByMonth(country, Integer.valueOf(month)));
-        }
+            System.out.println(analyzer.getLowestTempByMonth(country, Integer.valueOf(month)));
+            A1.add(analyzer.getLowestTempByMonth(country, Integer.valueOf(month))); 
+            System.out.println(analyzer.getHighestTempByMonth(country, Integer.valueOf(month)));
+            A1.add(analyzer.getHighestTempByMonth(country, Integer.valueOf(month))); 
+            
+        } 
     }
 }

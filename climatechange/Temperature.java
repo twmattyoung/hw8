@@ -53,3 +53,4 @@ public class Temperature implements ITemperature {
         return (9.0 / 5) * temp + 32;
     }
 }
+
