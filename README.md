@@ -1,2 +1,3 @@
 # hw8
-java
+Jeffrey's java project
+
