@@ -1,6 +1,6 @@
 package climatechange;
 
-public class Temperature implements ITemperature {
+public class Temperature implements Comparable<Temperature>, ITemperature {
     private String country;
     private String iso3116;
     private String month;
@@ -52,5 +52,10 @@ public class Temperature implements ITemperature {
     private double cToF(double temp) {
         return (9.0 / 5) * temp + 32;
     }
+
+	@Override
+	public int compareTo(Temperature that) {
+		return Double.compare(this.tempCen, that.tempCen);
+	}
 }
 

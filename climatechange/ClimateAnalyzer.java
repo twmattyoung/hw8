@@ -93,15 +93,45 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
     }
 
 	public TreeSet<ITemperature> getTempWithinRange(String country, double rangeLowTemp, double rangeHighTemp){
-        return null;
+        TreeSet<ITemperature> temps = new TreeSet<ITemperature>();
+        for (ITemperature temp : records) {
+        	if (temp.getCountry().equals(country) && temp.getTemperature(false) >= rangeLowTemp && temp.getTemperature(false) <= rangeHighTemp) {
+        		temps.add(temp);
+        	}
+        }
+        return temps;
     }
 
 	public ITemperature getLowestTempYearByCountry(String country){
-        return null;
+		ArrayList<ITemperature> temps = new ArrayList<ITemperature>(); //ArrayList for matching countries
+		for (ITemperature record : records) {
+			if (record.getCountry().equals(country)) {
+				temps.add(record);
+        	}
+        }
+		ITemperature lowest = temps.get(0); //First value with the given country to compare
+		for (ITemperature temp : temps) {
+			if (temp.getTemperature(true) <= lowest.getTemperature(true)) {
+				lowest = temp;
+			}
+		}
+		return lowest;
     }
 
 	public ITemperature getHighestTempYearByCountry(String country){
-        return null;
+		ArrayList<ITemperature> temps = new ArrayList<ITemperature>(); //ArrayList for matching countries
+		for (ITemperature record : records) {
+			if (record.getCountry().equals(country)) {
+				temps.add(record);
+        	}
+        }
+		ITemperature highest = temps.get(0); //First value with the given country to compare
+		for (ITemperature temp : temps) {
+			if (temp.getTemperature(true) >= highest.getTemperature(true)) {
+				highest = temp;
+			}
+		}
+		return highest;
     }
 
 	public ArrayList<ITemperature> allCountriesGetTop10LowestTemp(int month){
@@ -136,20 +166,43 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
             ArrayList<ITemperature> A1 = new ArrayList<ITemperature>();
             System.out.print("Enter Country : ");
             String country = scanner.nextLine();
-            //System.out.print("Enter Month(1-12) : ");
-            //String month = scanner.nextLine();
-            System.out.print("Enter Year : ");
-            int year = scanner.nextInt();
-            /** System.out.println(analyzer.getLowestTempByMonth(country, Integer.valueOf(month)));
+            
+            
+            /** Temperature by month tester
+             * System.out.print("Enter Month(1-12) : ");
+            String month = scanner.nextLine();
+            System.out.println(analyzer.getLowestTempByMonth(country, Integer.valueOf(month)));
             A1.add(analyzer.getLowestTempByMonth(country, Integer.valueOf(month))); 
             System.out.println(analyzer.getHighestTempByMonth(country, Integer.valueOf(month)));
             A1.add(analyzer.getHighestTempByMonth(country, Integer.valueOf(month))); 
             **/
             
+            /** Temperature by year tester
+             * System.out.print("Enter Year : ");
+            int year = scanner.nextInt();
             System.out.println(analyzer.getLowestTempByYear(country, year));
             A1.add(analyzer.getLowestTempByYear(country, year)); 
             System.out.println(analyzer.getHighestTempByYear(country, year));
             A1.add(analyzer.getHighestTempByYear(country, year)); 
+            **/
+            
+            /** Temperature by given range 
+            System.out.println("Enter the lower temperature(In Celsius) range : ");
+            double lowerTemp = scanner.nextDouble();
+            System.out.println("Enter the higher temperature(In Celsius) range : ");
+            double higherTemp = scanner.nextDouble();
+            System.out.println(analyzer.getTempWithinRange(country, lowerTemp, higherTemp));
+            for (ITemperature rangeTemp : analyzer.getTempWithinRange(country, lowerTemp, higherTemp)) {
+            	A1.add(rangeTemp);
+            }
+            */
+            
+            
+            /** Temperature by given country */
+            System.out.println(analyzer.getHighestTempYearByCountry(country));
+            A1.add(analyzer.getHighestTempYearByCountry(country));
+            System.out.println(analyzer.getLowestTempYearByCountry(country));
+            A1.add(analyzer.getLowestTempYearByCountry(country));
             
         } 
     }
