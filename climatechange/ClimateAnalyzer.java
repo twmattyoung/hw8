@@ -144,13 +144,11 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
         ArrayList<ITemperature> topL = new ArrayList<ITemperature>();
         int i = 0;
         for (ITemperature ten : temps) {
-        	if (i < 10) {
-        		topL.add(ten);
-        		i++;
-        	}
-        	else {
+        	if (i >= 10) {
         		break;
         	}
+        	topL.add(ten);
+        	i++;
         }
         return topL;
     }
@@ -166,13 +164,12 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
         ArrayList<ITemperature> topH = new ArrayList<ITemperature>();
         int i = 0;
         for (ITemperature ten : tempsReverse) {
-        	if (i < 10) {
-        		topH.add(ten);
-        		i++;
-        	}
-        	else {
+        	if (i >= 10) {
         		break;
         	}
+
+            topH.add(ten);
+            i++;
         }
         return topH;
     }
@@ -185,13 +182,11 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
         ArrayList<ITemperature> topL = new ArrayList<ITemperature>();
         int i = 0;
         for (ITemperature ten : temps) {
-        	if (i < 10) {
-        		topL.add(ten);
-        		i++;
-        	}
-        	else {
+        	if (i >= 10) {
         		break;
         	}
+            topL.add(ten);
+            i++;
         }
         return topL;
     }
@@ -205,13 +200,11 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
         ArrayList<ITemperature> topH = new ArrayList<ITemperature>();
         int i = 0;
         for (ITemperature ten : tempsReverse) {
-        	if (i < 10) {
-        		topH.add(ten);
-        		i++;
-        	}
-        	else {
+        	if (i >= 10) {
         		break;
         	}
+            topH.add(ten);
+            i++;
         }
         return topH;
     }
