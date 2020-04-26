@@ -135,19 +135,85 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
     }
 
 	public ArrayList<ITemperature> allCountriesGetTop10LowestTemp(int month){
-        return null;
+        TreeSet<ITemperature> temps = new TreeSet<ITemperature>();
+        for (ITemperature temp : records) {
+        	if (temp.getMonth().equals(WeatherIO.monthTab.get(month))) {
+        		temps.add(temp);
+        	}
+        }
+        ArrayList<ITemperature> topL = new ArrayList<ITemperature>();
+        int i = 0;
+        for (ITemperature ten : temps) {
+        	if (i < 10) {
+        		topL.add(ten);
+        		i++;
+        	}
+        	else {
+        		break;
+        	}
+        }
+        return topL;
     }
 
 	public ArrayList<ITemperature> allCountriesGetTop10HighestTemp(int month){
-        return null;
+		TreeSet<ITemperature> temps = new TreeSet<ITemperature>();
+        for (ITemperature temp : records) {
+        	if (temp.getMonth().equals(WeatherIO.monthTab.get(month))) {
+        		temps.add(temp);
+        	}
+        }
+        TreeSet<ITemperature> tempsReverse = (TreeSet<ITemperature>) temps.descendingSet();
+        ArrayList<ITemperature> topH = new ArrayList<ITemperature>();
+        int i = 0;
+        for (ITemperature ten : tempsReverse) {
+        	if (i < 10) {
+        		topH.add(ten);
+        		i++;
+        	}
+        	else {
+        		break;
+        	}
+        }
+        return topH;
     }
 
 	public ArrayList<ITemperature> allCountriesGetTop10LowestTemp(){
-        return null;
+		TreeSet<ITemperature> temps = new TreeSet<ITemperature>();
+        for (ITemperature temp : records) {
+        	temps.add(temp);
+        }
+        ArrayList<ITemperature> topL = new ArrayList<ITemperature>();
+        int i = 0;
+        for (ITemperature ten : temps) {
+        	if (i < 10) {
+        		topL.add(ten);
+        		i++;
+        	}
+        	else {
+        		break;
+        	}
+        }
+        return topL;
     }
 
 	public ArrayList<ITemperature> allCountriesGetTop10HighestTemp(){
-        return null;
+		TreeSet<ITemperature> temps = new TreeSet<ITemperature>();
+        for (ITemperature temp : records) {
+        	temps.add(temp);
+        }
+        TreeSet<ITemperature> tempsReverse = (TreeSet<ITemperature>) temps.descendingSet();
+        ArrayList<ITemperature> topH = new ArrayList<ITemperature>();
+        int i = 0;
+        for (ITemperature ten : tempsReverse) {
+        	if (i < 10) {
+        		topH.add(ten);
+        		i++;
+        	}
+        	else {
+        		break;
+        	}
+        }
+        return topH;
     }
 
 	public ArrayList<ITemperature> allCountriesGetAllDataWithinTempRange(double lowRangeTemp,double highRangeTemp){
@@ -164,8 +230,8 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
         ClimateAnalyzer analyzer = new ClimateAnalyzer();
         try (Scanner scanner = new Scanner(System.in)) {
             ArrayList<ITemperature> A1 = new ArrayList<ITemperature>();
-            System.out.print("Enter Country : ");
-            String country = scanner.nextLine();
+            //System.out.print("Enter Country : ");
+            //String country = scanner.nextLine();
             
             
             /** Temperature by month tester
@@ -198,11 +264,32 @@ public class ClimateAnalyzer implements IClimateAnalyzer {
             */
             
             
-            /** Temperature by given country */
+            /** Temperature by given country 
             System.out.println(analyzer.getHighestTempYearByCountry(country));
             A1.add(analyzer.getHighestTempYearByCountry(country));
             System.out.println(analyzer.getLowestTempYearByCountry(country));
             A1.add(analyzer.getLowestTempYearByCountry(country));
+            */
+            
+            System.out.println("Enter Month(1-12) : ");
+            String month = scanner.nextLine();
+            System.out.println(analyzer.allCountriesGetTop10LowestTemp(Integer.valueOf(month)));
+            for (ITemperature top : analyzer.allCountriesGetTop10LowestTemp(Integer.valueOf(month))) {
+            	A1.add(top);
+            }
+            System.out.println(analyzer.allCountriesGetTop10HighestTemp(Integer.valueOf(month)));
+            for (ITemperature top : analyzer.allCountriesGetTop10HighestTemp(Integer.valueOf(month))) {
+            	A1.add(top);
+            }
+            System.out.println(analyzer.allCountriesGetTop10LowestTemp());
+            for (ITemperature top : analyzer.allCountriesGetTop10LowestTemp()) {
+            	A1.add(top);
+            }
+            System.out.println(analyzer.allCountriesGetTop10HighestTemp());
+            for (ITemperature top : analyzer.allCountriesGetTop10HighestTemp()) {
+            	A1.add(top);
+            }
+           
             
         } 
     }
